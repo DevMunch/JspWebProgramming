@@ -19,8 +19,30 @@ public class UserDAO {
     private String USER_INSERT = "insert into users values(?,?,?,?)";
     private String USER_UPDATE = "update users set name=?,role=? where id=?";
     private String USER_DELETE = "delete users where id=?";
-
+    private String USER_GET = "select * from users where id = ?";
     // USERS 테이블 관련 CRUD 메서드
+    // 회원 상세 조회
+    public UserVO getUser(UserVO vo){
+        UserVO user = null;
+        try{
+            conn = JDBCUtil.getConnecttion();
+            stmt = conn.prepareStatement(USER_GET);
+            stmt.setString(1,vo.getId());
+            rs = stmt.executeQuery();
+            while (rs.next()){
+                user = new UserVO();
+                user.setId(rs.getString("ID"));
+                user.setPassword(rs.getString("PASSWORD"));
+                user.setName(rs.getString("NAME"));
+                user.setRole(rs.getString("ROLE"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            JDBCUtil.close(rs,stmt,conn);
+        }
+        return user;
+    }
     // 회원 삭제
     public void deleteUser(String id){
         try{

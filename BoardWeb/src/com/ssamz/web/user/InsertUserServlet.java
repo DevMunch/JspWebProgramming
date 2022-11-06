@@ -1,5 +1,6 @@
 package com.ssamz.web.user;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,13 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/insertUser.do")
+@WebServlet(urlPatterns = "/insertUser.do")
 public class InsertUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    private String encoding;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         // 1. 사용자 입력 정보 추출
         // 인코딩 처리
+        ServletContext context = getServletContext();
+        encoding = context.getInitParameter("boardEncoding");
+        System.out.println("--->Encoding : " + encoding);
+
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
         String password = request.getParameter("password");
