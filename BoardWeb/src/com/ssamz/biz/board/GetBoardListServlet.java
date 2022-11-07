@@ -12,6 +12,24 @@ public class GetBoardListServlet extends HttpServlet {
     private static final long serialVersionUID=1L;
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        // 0. 상태 정보 체크
+        Cookie[] cookieList = request.getCookies();
+        if(cookieList==null){ // 쿠키 목록이 없다면 login.html로 이동
+            response.sendRedirect("/login.html");
+        } else{
+            String userId = null;
+
+            for(Cookie cookie : cookieList){
+                // userId라는 쿠기 이름이 있는지 찾는다.
+                if(cookie.getName().equals("userId")){
+                    userId = cookie.getValue(); // userId의 쿠키값을 저장한다.
+                }
+            }
+            if(userId == null){
+                response.sendRedirect("/login.html");
+            }
+        }
+
         // 1. DB 연동 처리
         BoardVO vo = new BoardVO();
 
