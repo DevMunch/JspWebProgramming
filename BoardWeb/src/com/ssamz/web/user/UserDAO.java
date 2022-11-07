@@ -15,11 +15,11 @@ public class UserDAO {
     private ResultSet rs = null;
 
     // USERS 테이블 관련 SQL 명령어
-    private String USER_LIST = "select * from users";
-    private String USER_INSERT = "insert into users values(?,?,?,?)";
-    private String USER_UPDATE = "update users set name=?,role=? where id=?";
-    private String USER_DELETE = "delete users where id=?";
-    private String USER_GET = "select * from users where id = ?";
+    private static String USER_LIST = "select * from users";
+    private static String USER_INSERT = "insert into users values(?,?,?,?)";
+    private static String USER_UPDATE = "update users set name=?,role=? where id=?";
+    private static String USER_DELETE = "delete users where id=?";
+    private static String USER_GET = "select * from users where id = ?";
     // USERS 테이블 관련 CRUD 메서드
     // 회원 상세 조회
     public UserVO getUser(UserVO vo){
