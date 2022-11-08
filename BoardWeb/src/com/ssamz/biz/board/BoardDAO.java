@@ -3,6 +3,7 @@ package com.ssamz.biz.board;
 import com.ssamz.biz.common.JDBCUtil;
 import com.ssamz.web.user.UserVO;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDAO {
+
+    // 검색 관련 쿼리
+    private static String BOARD_LIST_T = "select * from board where title like '%'||?||'%' order by seq desc";
+    private static String BOARD_LIST_C = "select * from board where content like '%'||?||'%' order by seq desc";
+
     // JDBC 관련 변수
     private Connection conn = null;
     private PreparedStatement stmt = null;
@@ -99,7 +105,12 @@ public class BoardDAO {
         List<BoardVO> boardList = new ArrayList<BoardVO>();
         try{
             conn = JDBCUtil.getConnecttion();
-            stmt = conn.prepareStatement(BOARD_LIST);
+            if(vo.getSearchCondition().equals("TITLE")){
+                stmt = conn.prepareStatement(BOARD_LIST_T);
+            }else if(vo.getSearchCondition().equals("CONTENT")){
+                stmt = conn.prepareStatement(BOARD_LIST_C);
+            }
+            stmt.setString(1, vo.getSearchKeyword());
             rs = stmt.executeQuery();
             while (rs.next()){
                 BoardVO board = new BoardVO();

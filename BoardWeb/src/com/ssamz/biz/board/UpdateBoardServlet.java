@@ -12,7 +12,7 @@ public class UpdateBoardServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 인코딩 설정
-        ServletContext context =getServletContext();
+        ServletContext context = getServletContext();
         this.encoding = context.getInitParameter("boardEncoding");
 
         // 1. 사용자 입력 정보 추출

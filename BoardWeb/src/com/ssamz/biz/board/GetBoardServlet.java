@@ -12,21 +12,11 @@ public class GetBoardServlet extends HttpServlet {
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         // 0. 상태 정보 체크
-        Cookie[] cookieList = request.getCookies();
-        if(cookieList==null){ // 쿠키 목록이 없다면 login.html로 이동
-            response.sendRedirect("/login.html");
-        } else{
-            String userId = null;
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("userId");
 
-            for(Cookie cookie : cookieList){
-                // userId라는 쿠기 이름이 있는지 찾는다.
-                if(cookie.getName().equals("userId")){
-                    userId = cookie.getValue(); // userId의 쿠키값을 저장한다.
-                }
-            }
-            if(userId == null){
-                response.sendRedirect("/login.html");
-            }
+        if(userId == null){
+            response.sendRedirect("/");
         }
 
         // 1. 사용자 입력 정보 추출
@@ -79,7 +69,10 @@ public class GetBoardServlet extends HttpServlet {
         out.println("</table>");
         out.println("<hr>");
         out.println("<a href='insertBoard.html'>글등록</a>&nbsp;&nbsp;&nbsp;");
-        out.println("<a href='deleteBoard.do?seq="+board.getSeq() + "'>글삭제</a>&nbsp;&nbsp;&nbsp;");
+        String userRole = (String) session.getAttribute("userRole");
+        if(userRole.equals("ADMIN")){
+            out.println("<a href='deleteBoard.do?seq="+board.getSeq() + "'>글삭제</a>&nbsp;&nbsp;&nbsp;");
+        }
         out.println("<a href='getBoardList.do'>글목록</a>");
         out.println("</center>");
         out.println("</body>");
