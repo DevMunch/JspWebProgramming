@@ -1,9 +1,7 @@
 package com.ssamz.biz.board;
 
-import com.ssamz.biz.common.JDBCUtil;
-import com.ssamz.web.user.UserVO;
+import com.ssamz.web.common.JDBCUtil;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

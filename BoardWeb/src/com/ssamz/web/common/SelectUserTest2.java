@@ -1,10 +1,10 @@
-package com.ssamz.biz.common;
+package com.ssamz.web.common;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class SelectUserTest1 {
+public class SelectUserTest2 {
     public static void main(String[] args) {
         // JDBC 관련 변수
         Connection conn = null;
@@ -15,21 +15,14 @@ public class SelectUserTest1 {
             conn = JDBCUtil.getConnecttion();
 
             // JDBC 3단계 : Statement 생성
-            String sql = "select * from users";
+            String sql = "select * from users where role = ?";
             stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "ADMIN");
 
             // JDBC 4단계 : SQL 전송
             rs = stmt.executeQuery();
 
             // JDBC 5단계 : 조회 결과 사용
-//            System.out.println("[USER 목록]");
-//            rs.next();
-//            System.out.print(rs.getString("ID") + " : ");
-//            System.out.print(rs.getString("PASSWORD") + " : ");
-//            System.out.print(rs.getString("NAME") + " : ");
-//            System.out.print(rs.getString("ROlE"));
-
-            // JDBC 5단계 : 조회 결과 사용, 모든 유저 출력
             System.out.println("[USER 목록]");
             while(rs.next()){
                 System.out.print(rs.getString("ID") + " : ");

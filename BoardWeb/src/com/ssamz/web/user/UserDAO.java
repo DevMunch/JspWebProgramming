@@ -1,6 +1,6 @@
 package com.ssamz.web.user;
 
-import com.ssamz.biz.common.JDBCUtil;
+import com.ssamz.web.common.JDBCUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

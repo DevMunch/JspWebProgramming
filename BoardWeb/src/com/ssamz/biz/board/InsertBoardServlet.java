@@ -13,9 +13,6 @@ public class InsertBoardServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1. 사용자 입력 정보 추출
-        ServletContext context = getServletContext();
-        this.encoding = context.getInitParameter("boardEncoding");
-        request.setCharacterEncoding(encoding);
         String title = request.getParameter("title");
         String writer = request.getParameter("writer");
         String content = request.getParameter("content");

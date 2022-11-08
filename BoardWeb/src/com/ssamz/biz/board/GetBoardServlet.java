@@ -10,15 +10,8 @@ import java.io.PrintWriter;
 public class GetBoardServlet extends HttpServlet {
     private static final long serialVersionUID=1L;
 
+    @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        // 0. 상태 정보 체크
-        HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-
-        if(userId == null){
-            response.sendRedirect("/");
-        }
-
         // 1. 사용자 입력 정보 추출
         String seq = request.getParameter("seq");
 
@@ -69,6 +62,7 @@ public class GetBoardServlet extends HttpServlet {
         out.println("</table>");
         out.println("<hr>");
         out.println("<a href='insertBoard.html'>글등록</a>&nbsp;&nbsp;&nbsp;");
+        HttpSession session = request.getSession();
         String userRole = (String) session.getAttribute("userRole");
         if(userRole.equals("ADMIN")){
             out.println("<a href='deleteBoard.do?seq="+board.getSeq() + "'>글삭제</a>&nbsp;&nbsp;&nbsp;");

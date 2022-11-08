@@ -8,14 +8,8 @@ import java.io.IOException;
 @WebServlet("/deleteBoard.do")
 public class DeleteBoardServlet extends HttpServlet {
 
+    @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 0. 상태 정보 체크
-        HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-        if(userId == null){
-            response.sendRedirect("/");
-        }
-
         // 1. 사용자 입력 정보 추출
         String seq = request.getParameter("seq");
 
