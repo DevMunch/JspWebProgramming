@@ -7,7 +7,7 @@ import java.io.IOException;
 
 @WebServlet("/deleteBoard.do")
 public class DeleteBoardServlet extends HttpServlet {
-    @Override
+
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 0. 상태 정보 체크
         HttpSession session = request.getSession();
