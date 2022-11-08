@@ -35,16 +35,11 @@ public class LoginServlet extends HttpServlet {
             if(user.getPassword().equals(password)){
                 // 상태 정보를 세션에 저장한다.
                 HttpSession session = request.getSession();
-                //session.setMaxInactiveInterval(10); 세션의 유효시간 10초
-                session.setAttribute("userId", user.getId());
-                session.setAttribute("userName", user.getName());
-                session.setAttribute("userRole", user.getRole());
+                session.setAttribute("user",user);
 
                 // 글 목록 화면으로 포워딩한다.
-                // 글 목록 화면에서 사용할 데이터를 ServletContext에 등록한다.
-                ServletContext context = getServletContext();
-                context.setAttribute("welcomeMessage", "님 환영합니다.");
-                response.sendRedirect("getBoardList.do");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("getBoardList.do");
+                dispatcher.forward(request,response);
             }else{
                 // 비밀번호가 틀린 경우
                 out.println("비밀번호 오류입니다.<br>");

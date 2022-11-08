@@ -19,7 +19,11 @@
         <param-name>boardEncoding</param-name>
         <param-value>UTF-8</param-value>
     </context-param>
-
+    <!-- 리스너 등록 -->
+    <listener>
+        <listener-class>com.ssamz.web.common.BoardWebContextListener</listener-class>
+    </listener>
+    
     <!-- 필터 등록-->
 <!--    <filter>-->
 <!--        <filter-name>timeCheck</filter-name>-->

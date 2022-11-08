@@ -14,10 +14,6 @@ public class TimeCheckFilter extends HttpFilter implements Filter {
         System.out.println("===> TimeCheckFilter 생성");
     }
 
-    public void init(FilterConfig fConfig) throws ServletException{
-        System.out.println("---> init() 호출");
-    }
-
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
 
         HttpServletRequest req = (HttpServletRequest) request;
@@ -29,9 +25,5 @@ public class TimeCheckFilter extends HttpFilter implements Filter {
 
         long endTime = System.currentTimeMillis();
         System.out.println(path + "요청 처리에 소요된 시간 : " + (endTime - startTime) + "(ms)초");
-    }
-    
-    public void destroy(){
-        System.out.println("---> destroy() 호출");
     }
 }

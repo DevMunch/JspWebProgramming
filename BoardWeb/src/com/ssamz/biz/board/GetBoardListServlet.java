@@ -1,5 +1,7 @@
 package com.ssamz.biz.board;
 
+import com.ssamz.web.user.UserVO;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -35,7 +37,7 @@ public class GetBoardListServlet extends HttpServlet {
         List<BoardVO> boardList = boardDAO.getBoardList(vo);
 
         // 3. 응답 화면 구성
-        response.setContentType("text/html; charset=EUC-KR");
+        response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
 
         out.println("<html>");
@@ -45,9 +47,9 @@ public class GetBoardListServlet extends HttpServlet {
         out.println("<body>");
         out.println("<center>");
         out.println("<h1>게시글 목록</h1>");
-        String userName = (String) session.getAttribute("userName");
+        UserVO user = (UserVO) session.getAttribute("user");
 //        String welcomeMessage = (String) context.getAttribute("welcomeMessage");
-        out.println("<h3>"+ userName + "님 환영합니다.");
+        out.println("<h3>"+ user.getName() + "님 환영합니다.");
         out.println("<a href='logout.do'>Log-out</a></h3>");
 
         out.println("<!-- 검색 시작 -->");
