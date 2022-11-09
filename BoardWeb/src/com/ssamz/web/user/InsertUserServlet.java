@@ -34,7 +34,7 @@ public class InsertUserServlet extends HttpServlet {
         dao.insertUser(vo);
 
         // 3. 화면 이동
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
         dispatcher.forward(request, response);
     }
 }

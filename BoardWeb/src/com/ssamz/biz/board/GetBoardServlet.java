@@ -63,7 +63,7 @@ public class GetBoardServlet extends HttpServlet {
         out.println("</tr>");
         out.println("</table>");
         out.println("<hr>");
-        out.println("<a href='insertBoard.html'>글등록</a>&nbsp;&nbsp;&nbsp;");
+        out.println("<a href='insertBoard.jsp'>글등록</a>&nbsp;&nbsp;&nbsp;");
         HttpSession session = request.getSession();
         UserVO user = (UserVO) session.getAttribute("user");
         if(user.getRole().equals("ADMIN")){
